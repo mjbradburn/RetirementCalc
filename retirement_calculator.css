@@ -1,0 +1,48 @@
+label {
+    display: inline-block;
+    width:75px;
+    margin-right:5px;
+    margin-left:5px;
+}
+input {
+    display: inline-block;
+    margin: 10px;
+    padding: 2px;
+    width: 30%;
+}
+output {
+    display: inline-block;
+    margin: 10px;
+    padding: 2px;
+    width: 20%;
+}
+
+body {
+    padding-left: 2%;
+    background-color: C7EFCF;
+}
+
+#resultpane {
+    display: none;
+}
+
+#advanced {
+    display: none;
+}
+#monthlysavings {
+    margin-left: 5px;
+}
+
+.pure-control-group {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.error {
+    color:red;
+}
+.errorMsg {
+    color: red;
+    font-style: bold;
+}
+
