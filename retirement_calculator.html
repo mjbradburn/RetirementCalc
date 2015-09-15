@@ -1,89 +1,119 @@
     <!DOCTYPE html>
     <html>
     <head> 
-    <title> Retirement Calculator </title>
-    <link rel="stylesheet" href="retirement_calculator.css" type="text/css">
-    <script type="text/javascript" src="javascripts/jquery-1.11.3.js"></script>
-    <script type="text/javascript" src="javascripts/retirement_calculator.js"></script>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    	<title> Retirement Calculator </title>
+    	<link rel="stylesheet" href="retirement_calculator.css" type="text/css">
+    	<script type="text/javascript" src="javascripts/jquery-1.11.3.js"></script>
+    	<script type="text/javascript" src="javascripts/retirement_calculator.js"></script>
+    	<script type="text/javascript" src="javascripts/autoNumeric.js"></script>
+    	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
     </head>
     <body>
-    <form id="form" class="pure-form pure-form-aligned">
-    <fieldset>
-    <fieldset id='resultpane'>
-        <legend>Results</legend>
-        <div class="pure-control-group">
-            <label for="total">Total Amount to Save:</label>
-            <output id="totalsavings"></output>
-        </div>
-        <div class="pure-control-group">
-            <label for="total">Monthly Contribution:</label>
-            <output id="monthlysavings"></output>
-        </div>
-    </fieldset>
-    <legend>Retirement Calculator</legend>
-    <div class="pure-control-group">
-        <label for="age">Current Age:</label>
-        <input id="age" name="age" value="35" </input>
-    </div>
-    <div class="pure-control-group">
-        <label for="retirementage">Retirement Age:</label>
-        <select id="retirementage" name="retirementage">
-            <option>55</option>
-            <option>60</option>
-            <option selected="selected">65</option>
-            <option>70</option>
-        </select>
-    </div>
-    <div class="pure-control-group">
-        <label for="currentincome">Current Annual Income:</label>
-        <input id="currentincome" type="text" name="currentincome" value="30000" pattern="[0-9]*"></input>
-    </div>
-    <div class="pure-control-group">
-        <label for="retirementincome">Desired Annual Retirement Income:</label>
-        <input id="retirementincome" name="retirementincome" value="21000"></input>
-    </div>
-    <div class="pure-control-group">
-        <label for="currentsavings">Current Retirement Savings:</label>
-        <input id="currentsavings" name="currentsavings" value="2000"></input>
-    </div>
-    <div class="pure-control-group">
-        <button class="pure-button pure-button-primary" type="submit" id="submit" name="submitBtn" value="Convert">Calculate</button>
-        <button class="pure-button pure-button-primary" type="reset" id="reset" name="submitBtn">Reset</button>
-    </div>
-    <div class="pure-control-group">
-    <button class="pure-button pure-button-primary" id="options" name="advancedBtn" type="button">Advanced Options</button>
-    </div>
-    <div id="advanced">
-        <div class="pure-control-group">
-            <label for="social-security" class="pure-checkbox">
-                <input type="checkbox" name="social security" value="yes" checked>
-                Include Social Security
-            </label>
-        </div>
-        <div class="pure-control-group">
-            <label for="expectedinterest">Expected Interest Rate</label>
-            <input type="range" id="intslider" min="0" max="15" value="5" step="1" /> <span id="expectedinterest"></span>
-        </div>
-        <div class="pure-control-group">
-            <label for="pension">Pension:</label>
-            <input id="pension" name="pension" value="0"></input>
-        </div>
-        <div class="pure-control-group">
-            <label for="annuity">Annuity:</label>
-            <input id="annuity" name="annuity" value="0"></input>
-        </div>
-        <div class="pure-control-group">
-            <label for="otherincome">Other Income:</label>
-            <input id="otherincome" name="other" value="0"></input>
-        </div>
-        <div class="pure-control-group">
-            <label for="expectancy">Life Expectancy</label>
-            <input type="range" id="lifeslider" min="82" max="97" value="86" step="1" /> 
-            <span id="ageSelected"></span>
-        </div>
-    </div>
-    </fieldset>
-    </form>
+    	<form id="form" class="pure-form pure-form-aligned">
+    		<fieldset>
+    			<!-- Results -->
+    			<fieldset id='resultpane'>
+    				<legend>Results</legend>
+    				<div class="pure-control-group">
+    					<label for="total">Total Amount to Save:</label>
+    					<output id="totalsavings"></output>
+    				</div>
+    				<div class="pure-control-group">
+    					<label for="total">Monthly Contribution:</label>
+    					<output id="monthlysavings" type="number"></output>
+    				</div>
+    				<div class="pure-control-group">
+    					<button class="pure-button pure-button-primary" id="print" name="printBtn" type="button">Print</button>
+    			</div>    				
+    			</fieldset>
+
+    			<!-- User Inputs -->
+    			<legend>Retirement Calculator</legend>
+    			<div class="pure-control-group">
+    				<label for="name">Name:</label>
+    				<input id="name" name="name" </input>
+    			</div>
+    			<div class="pure-control-group">
+    				<label for="birthmonth">Month of Birth:</label>
+    				<select id="birthmonth" name="birthmonth">
+    					<option>Jan</option>
+    					<option>Feb</option>
+    					<option>Mar</option>
+    					<option>Apr</option>
+    					<option>May</option>
+    					<option>Jun</option>
+    					<option>Jul</option>
+    					<option>Aug</option>
+    					<option>Sept</option>
+    					<option>Oct</option>
+    					<option>Nov</option>
+    					<option>Dec</option>
+    				</select>
+    				<label for="birthyear">Year:</label>
+    				<select id="birthyear" value="1980"></select>
+    			</div>
+    			<div class="pure-control-group">
+    				<label for="age">Age This Year:</label>
+    				<input id="age" name="age" value="35" </input>
+    			</div>
+    			<div class="pure-control-group">
+    				<label for="retirementage">Retirement Age:</label>
+    				<select id="retirementage" name="retirementage">
+    					<option>55</option>
+    					<option>60</option>
+    					<option selected="selected">65</option>
+    					<option>70</option>
+    				</select>
+    			</div>
+    			<div class="pure-control-group">
+    				<label for="currentincome">Current Annual Income:</label>
+    				<input id="currentincome" type="text" name="currentincome" value="30000" pattern="[0-9]*"></input>
+    			</div>
+    			<div class="pure-control-group">
+    				<label for="retirementincome">Desired Annual Retirement Income:</label>
+    				<input id="retirementincome" name="retirementincome" value="21000"></input>
+    			</div>
+    			<div class="pure-control-group">
+    				<label for="currentsavings">Current Retirement Savings:</label>
+    				<input id="currentsavings" name="currentsavings" value="2000"></input>
+    			</div>
+    			<div class="pure-control-group">
+    				<button class="pure-button pure-button-primary" type="submit" id="submit" name="submitBtn" value="Convert">Calculate</button>
+    				<button class="pure-button pure-button-primary" type="reset" id="reset" name="submitBtn">Reset</button>
+    			</div>
+    			<div class="pure-control-group">
+    				<button class="pure-button pure-button-primary" id="options" name="advancedBtn" type="button">Advanced Options</button>
+    			</div>
+    			<div id="advanced">
+    				<div class="pure-control-group">
+    					<label for="social-security" class="pure-checkbox">
+    						<input type="checkbox" name="social security" value="yes" checked>
+    						Include Social Security
+    					</label>
+    				</div>
+    				<div class="pure-control-group">
+    					<label for="expectedinterest">Expected Interest Rate</label>
+    					<input type="range" id="intslider" min="0" max="15" value="5" step="1" /> <span id="expectedinterest"></span>
+    				</div>
+    				<div class="pure-control-group">
+    					<label for="pension">Pension:</label>
+    					<input id="pension" name="pension" value="0"></input>
+    				</div>
+    				<div class="pure-control-group">
+    					<label for="annuity">Annuity:</label>
+    					<input id="annuity" name="annuity" value="0"></input>
+    				</div>
+    				<div class="pure-control-group">
+    					<label for="otherincome">Other Income:</label>
+    					<input id="otherincome" name="other" value="0"></input>
+    				</div>
+    				<div class="pure-control-group">
+    					<label for="expectancy">Life Expectancy</label>
+    					<input type="range" id="lifeslider" min="82" max="97" value="86" step="1" /> 
+    					<span id="ageSelected"></span>
+    				</div>
+    			</div>
+    		</fieldset>
+    	</form>
     </body>
     </html>

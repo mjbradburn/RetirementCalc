@@ -1,9 +1,11 @@
 $(document).ready(function () {
 
-    // alert("i'm working");
+    $("#currentincome").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#retirementincome").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#currentsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#totalsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#monthlysavings").autoNumeric('init',{aSign: "$", mDec: "2"});
 
-    var test = document.getElementById("test");
-    //declare vars
     var intInput = document.getElementById("intslider");
     var intOutput = document.getElementById('expectedinterest');
     intOutput.innerHTML = $('#intslider').val() + "%";
@@ -17,9 +19,9 @@ $(document).ready(function () {
 
     var currentAge = document.getElementById('age');
     var retirementAge = document.getElementById('retirementage');
-    var currentIncome = document.getElementById('currentincome');
-    var retirementIncome = document.getElementById('retirementincome');
-    var currentSavings = document.getElementById('currentsavings');
+    var currentIncome = $("#currentincome").autoNumeric('get');//document.getElementById('currentincome');
+    var retirementIncome = $("#retirementincome").autoNumeric('get');//document.getElementById('retirementincome');
+    var currentSavings = $("#currentsavings").autoNumeric('get');//document.getElementById('currentsavings');
     var socialSecurityCheck = $('#socialsecurity').val();
     var expectedInterest = document.getElementById('expectedinterest');
     var pension = document.getElementById('pension');
@@ -123,10 +125,25 @@ $(document).ready(function () {
         40: 0.013
     };
 
+
+
     $(function () {
         $("#fineTune").accordion({
             collapsible: true
         });
+    });
+    //populate year options
+    for(i=1970; i<2015; i++){
+        if (i != 1980){
+            $("#birthyear").append("<option>" + i + "</option>");
+        } else {
+            $("#birthyear").append("<option selected>" + i + "</option>");
+        }
+    }        
+
+    //function to calculate age
+    $("#birthyear").change(function(){
+        $("#age").val( (new Date).getFullYear() - $("#birthyear").val());
     });
 
     //function to display interest slider value
@@ -149,12 +166,15 @@ $(document).ready(function () {
         } else {
             lifeOutput.innerHTML = 97;
         }
-
-
     });
 
     //on submit action
-    submitBtn.onclick = calculate;
+    /*submitBtn.onclick = calculate;*/
+    $('#submit').click(function(){
+        calculate();
+        $('#resultpane').slideDown();
+        return false;
+    })
 
     //on advanced action
     advancedBtn.onclick = showAdvancedOptions;
@@ -201,20 +221,38 @@ $(document).ready(function () {
     };
 
     //show results
-    function calculate() {
+        function calculate() {
         var yearsLeft = yearsToRetirementRounded(currentAge.value, retirementAge.value);
-        var socialSecurity = estimateSocSec(currentIncome.value);
-        var annualShortfall = retirementIncome.value - socialSecurity - pension.value - otherIncome.value;
+        var socialSecurity = estimateSocSec(currentIncome);
+        var annualShortfall = retirementIncome - socialSecurity - pension.value - otherIncome.value;
         var totalShortfall = annualShortfall * lifeFactorMap[[retirementAge.value, lifeOutput.innerHTML]];
-        var finalSavings = currentSavings.value * savingsFactorMap[yearsLeft];
+        var finalSavings = currentSavings * savingsFactorMap[yearsLeft];
         var additionalSavings = totalShortfall - finalSavings;
         var newSavings = additionalSavings * contributionMap[yearsLeft];
 
-        totalSavings.innerHTML = finalSavings + additionalSavings;
-        monthlySavings.innerHTML = newSavings/12;
+        $("#totalsavings").autoNumeric('set',finalSavings + additionalSavings);
+        $("#monthlysavings").autoNumeric('set', newSavings/12);
+        //totalSavings.innerHTML = finalSavings + additionalSavings;
+        //monthlySavings.innerHTML = newSavings/12;
         
-        $('#resultpane').show();
-        window.scrollTo(0, 0);
+        //$('#resultpane').show();
+        //window.scrollTo(0, 0);
         return false;
     };
+    // function calculate() {
+    //     var yearsLeft = yearsToRetirementRounded(currentAge.value, retirementAge.value);
+    //     var socialSecurity = estimateSocSec(currentIncome.value);
+    //     var annualShortfall = retirementIncome.value - socialSecurity - pension.value - otherIncome.value;
+    //     var totalShortfall = annualShortfall * lifeFactorMap[[retirementAge.value, lifeOutput.innerHTML]];
+    //     var finalSavings = currentSavings.value * savingsFactorMap[yearsLeft];
+    //     var additionalSavings = totalShortfall - finalSavings;
+    //     var newSavings = additionalSavings * contributionMap[yearsLeft];
+
+    //     totalSavings.innerHTML = finalSavings + additionalSavings;
+    //     monthlySavings.innerHTML = newSavings/12;
+        
+    //     //$('#resultpane').show();
+    //     //window.scrollTo(0, 0);
+    //     return false;
+    // };
 });
