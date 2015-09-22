@@ -172,7 +172,7 @@ $(document).ready(function () {
     /*submitBtn.onclick = calculate;*/
     $('#submit').click(function(){
         calculate();
-        $('#resultpane').slideDown();
+        $('#resultpane').slideDown("slow");
         return false;
     })
 
@@ -183,7 +183,7 @@ $(document).ready(function () {
     function showAdvancedOptions() {
         $('#advanced').toggle();
         $('html, body').animate({
-    scrollTop: $("#last").offset().top
+    scrollTop: $("#advanced").offset().top
 }, 1000);
     };
 
@@ -236,7 +236,7 @@ $(document).ready(function () {
         //monthlySavings.innerHTML = newSavings/12;
         
         //$('#resultpane').show();
-        //window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         return false;
     };
     // function calculate() {
