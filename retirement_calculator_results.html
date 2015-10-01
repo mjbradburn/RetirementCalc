@@ -1,40 +1,85 @@
  <!DOCTYPE html>
-    <html>
-    <head> 
-    	<title> Retirement Results </title>
-    	<link rel="stylesheet" href="retirement_calculator.css" type="text/css">
-    	<script type="text/javascript" src="javascripts/jquery-1.11.3.js"></script>
-    	<script type="text/javascript" src="javascripts/autoNumeric.js"></script>
-    	<script type="text/javascript" src="javascripts/results.js"></script>
-    	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-    </head>
-    <body>
+ <html>
+ <head> 
+     <title> Retirement Results </title>
+     <link rel="stylesheet" href="retirement_calculator.css" type="text/css">
+     <script type="text/javascript" src="javascripts/jquery-1.11.3.js"></script>
+     <script type="text/javascript" src="javascripts/autoNumeric.js"></script>
+     <script type="text/javascript" src="javascripts/results.js"></script>
+     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+ </head>
+ <body>
+     <table class="pure-table">
+        <thead> 
+            <tr>
+                <th colspan="4">Summary Report </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td id="fullname"></td>
+                <th>Age this Year</th>
+                <td id="current_age">current age</td>
+            </tr>
+            <tr>
+                <th>Retirement Age</th>
+                <td id="retirement_age"></td>
+                <th>Years until Retirement</th>
+                <td id="years_to_save"></td>
+            </tr>
+            <tr>
+                <th>Life Expectancy</th>
+                <td id="life_expectancy">lifeExpect</td>
+                <th>Year in Retirement</th>
+                <td id="ret_years">RetYrs</td>
+            </tr>
 
-    	<table class="pure-table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age this Year</th>
-            <th>Retirement Age</th>
-            <th>Years until Retirement</th>
-            <th>Life Expectancy</th>
-            <th>Year in Retirement</th>
-        </tr>
-    </thead>
 
-    <tbody>
-        <tr>
-            <td>first_last</td>
-            <td id="age">current age</td>
-            <td>RetAge</td>
-            <td>YrsToSave</td>
-            <td>lifeExpect</td>
-            <td>RetYrs</td>
-        </tr>
+        </tbody>
+        <br></br>
+    </table>
+    <table class="pure-table">
+        <thead> 
+            <tr>
+                <th colspan="4"> Savings Calculation </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Desired Retirement Income</th>
+                <td id="retirement_income"></td>
+                <th id="income_header"></th>
+                <td id="income_total"></td>
+            </tr>
+            <tr>
+                <th>Current Savings</th>
+                <td id="current_savings">here</td>
+                <th id="total_savings_header">Total</th>
+                <td id="savings_total"></td>
+            </tr>
+            <tr>
+                <th>Estimated Annual SSI</th>
+                <td id="social_security">5000</td>
+                <th id="total_ss_header">Amount for 30 years</th>
+                <td id="ss_total">6000</td>
+            </tr>
+            <tr>
+                <th>Other Annual Income</th>
+                <td>0</td>
+                <th>Amount for 30 years</th>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <th>Savings Gap</th>
+                <td id="savings_gap">7000</td>
+            </tr>
+        </tbody>
+    </table>
 
-        
-    </tbody>
-</table>
+    <p id="monthly_savings"></p>
 
-    </body>
-    </html>
+</body>
+</html>

@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-
-
     $("#currentincome").autoNumeric('init',{aSign: "$", mDec: "0"});
     $("#retirementincome").autoNumeric('init',{aSign: "$", mDec: "0"});
     $("#currentsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
@@ -20,6 +18,7 @@ $(document).ready(function () {
     var advancedBtn = document.getElementById('options');
     var printBtn = document.getElementById('print');
 
+    var name = document.getElementById("name");
     var currentAge = document.getElementById('age');
     var retirementAge = document.getElementById('retirementage');
     var currentIncome = $("#currentincome").autoNumeric('get');
@@ -243,14 +242,40 @@ $(document).ready(function () {
 
         $("#totalsavings").autoNumeric('set',finalSavings + additionalSavings);
         $("#monthlysavings").autoNumeric('set', newSavings/12);
-        //totalSavings.innerHTML = finalSavings + additionalSavings;
-        //monthlySavings.innerHTML = newSavings/12;
-        
-        //$('#resultpane').show();
+
+        window.sessionStorage.getItem('name');
+        window.sessionStorage.setItem('name', name.value);
+
+        window.sessionStorage.getItem('currentAge');
+        window.sessionStorage.setItem('currentAge', currentAge.value);
+
+        window.sessionStorage.getItem('retirementAge');
+        window.sessionStorage.setItem('retirementAge', retirementAge.value);
+
+        window.sessionStorage.getItem('expectancy');
+        window.sessionStorage.setItem('expectancy', lifeInput.value);
+
+        window.sessionStorage.getItem('retirementIncome');
+        window.sessionStorage.setItem('retirementIncome', retirementIncome);
+
+        window.sessionStorage.getItem('currentSavings');
+        window.sessionStorage.setItem('currentSavings', currentSavings);
+
+        window.sessionStorage.getItem('socialSecurity');
+        window.sessionStorage.setItem('socialSecurity', socialSecurity);
+
+        window.sessionStorage.getItem('totalShortfall');
+        window.sessionStorage.setItem('totalShortfall', totalShortfall);
+
+        // window.sessionStorage.getItem('additionalSavings');
+        // window.sessionStorage.setItem('additionalSavings', additionalSavings.value);
+
+        window.sessionStorage.getItem('monthlySavings');
+        window.sessionStorage.setItem('monthlySavings', newSavings/12);
+
         window.scrollTo(0, 0);
         return false;
     };
 
-    window.sessionStorage.getItem('age');
-    window.sessionStorage.setItem('age', currentAge.value);
+
 });
