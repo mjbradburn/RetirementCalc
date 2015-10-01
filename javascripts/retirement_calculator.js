@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+
+
     $("#currentincome").autoNumeric('init',{aSign: "$", mDec: "0"});
     $("#retirementincome").autoNumeric('init',{aSign: "$", mDec: "0"});
     $("#currentsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
@@ -16,12 +18,13 @@ $(document).ready(function () {
 
     var submitBtn = document.getElementById('submit');
     var advancedBtn = document.getElementById('options');
+    var printBtn = document.getElementById('print');
 
     var currentAge = document.getElementById('age');
     var retirementAge = document.getElementById('retirementage');
-    var currentIncome = $("#currentincome").autoNumeric('get');//document.getElementById('currentincome');
-    var retirementIncome = $("#retirementincome").autoNumeric('get');//document.getElementById('retirementincome');
-    var currentSavings = $("#currentsavings").autoNumeric('get');//document.getElementById('currentsavings');
+    var currentIncome = $("#currentincome").autoNumeric('get');
+    var retirementIncome = $("#retirementincome").autoNumeric('get');
+    var currentSavings = $("#currentsavings").autoNumeric('get');
     var socialSecurityCheck = $('#socialsecurity').val();
     var expectedInterest = document.getElementById('expectedinterest');
     var pension = document.getElementById('pension');
@@ -179,6 +182,9 @@ $(document).ready(function () {
     //on advanced action
     advancedBtn.onclick = showAdvancedOptions;
 
+    //on print action
+    printBtn.onclick = showPrintPage;
+
     //function to show advanced options
     function showAdvancedOptions() {
         $('#advanced').toggle();
@@ -187,7 +193,12 @@ $(document).ready(function () {
 }, 1000);
     };
 
-    //estimage social security payments
+    //display print page
+    function showPrintPage() {
+        window.location='retirement_calculator_results.html';
+    };
+
+    //estimate social security payments
     function estimateSocSec(income) {
         if (income >= 25000 && income < 40000) {
             return 12000;
@@ -239,20 +250,7 @@ $(document).ready(function () {
         window.scrollTo(0, 0);
         return false;
     };
-    // function calculate() {
-    //     var yearsLeft = yearsToRetirementRounded(currentAge.value, retirementAge.value);
-    //     var socialSecurity = estimateSocSec(currentIncome.value);
-    //     var annualShortfall = retirementIncome.value - socialSecurity - pension.value - otherIncome.value;
-    //     var totalShortfall = annualShortfall * lifeFactorMap[[retirementAge.value, lifeOutput.innerHTML]];
-    //     var finalSavings = currentSavings.value * savingsFactorMap[yearsLeft];
-    //     var additionalSavings = totalShortfall - finalSavings;
-    //     var newSavings = additionalSavings * contributionMap[yearsLeft];
 
-    //     totalSavings.innerHTML = finalSavings + additionalSavings;
-    //     monthlySavings.innerHTML = newSavings/12;
-        
-    //     //$('#resultpane').show();
-    //     //window.scrollTo(0, 0);
-    //     return false;
-    // };
+    window.sessionStorage.getItem('age');
+    window.sessionStorage.setItem('age', currentAge.value);
 });
