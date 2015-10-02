@@ -17,6 +17,7 @@ $(document).ready(function () {
     var submitBtn = document.getElementById('submit');
     var advancedBtn = document.getElementById('options');
     var printBtn = document.getElementById('print');
+    var teakBtn = document.getElementById('tweak');
 
     var name = document.getElementById("name");
     var currentAge = document.getElementById('age');
@@ -183,6 +184,14 @@ $(document).ready(function () {
 
     //on print action
     printBtn.onclick = showPrintPage;
+
+    //on tweak action
+    tweak.onclick = showTweakModal;
+
+    //function to show modal
+    function showTweakModal(){
+        alert("modal");
+    };
 
     //function to show advanced options
     function showAdvancedOptions() {
