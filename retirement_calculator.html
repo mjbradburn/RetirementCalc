@@ -2,13 +2,19 @@
     <html>
     <head> 
     	<title> Retirement Calculator </title>
+
+
+    	
     	<link rel="stylesheet" href="retirement_calculator.css" type="text/css">
     	<script type="text/javascript" src="javascripts/jquery-1.11.3.js"></script>
     	<script type="text/javascript" src="javascripts/retirement_calculator.js"></script>
     	<script type="text/javascript" src="javascripts/autoNumeric.js"></script>
     	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     </head>
     <body>
+    <p id='test'></p>
     	<form id="form" class="pure-form pure-form-aligned">
     		<fieldset>
     			<!-- Results -->
@@ -22,9 +28,59 @@
     					<label for="total">Monthly Contribution:</label>
     					<output id="monthlysavings" type="number"></output>
     				</div>
+
+
     				<div class="pure-control-group">
     					<button class="pure-button pure-button-primary" id="print" name="printBtn" type="button">Print</button>
-    			</div>    				
+    					
+    					<button class="pure-button pure-button-primary" type="button" id="tweak" name="tweakBtn" data-toggle="modal" data-target="#myModal">Tweak</button>
+
+
+
+    					<div class="modal fade" id="myModal" role="dialog">
+    						<div class="modal-dialog">
+
+    							<div class="modal-content">
+    								<div class="modal-body">
+    									<form class="pure-form pure-form-aligned">
+    										<fieldset>
+    											<div class="pure-control-group">
+    												<label for="modal_monthly">Monthly Contribution:</label>
+    												<output id="modalmonthly"></output>
+    											</div>
+    											<div class="pure-control-group">
+    												<label for="modalincome">Desired Retirement Income:</label>
+    												<input id="modalincome" name="other"></input>
+    											</div>
+    											<div class="pure-control-group">
+    												<label for="retirementage">Retirement Age:</label>
+    												<select id="modalretirementage" name="retirementage">
+    												<option>55</option>
+							    					<option>60</option>
+							    					<option>65</option>
+    												<option>70</option>
+    												</select>
+    											</div>
+
+    											
+
+    											
+    										</fieldset>
+    									</form>
+
+    								</div>
+    								<div class="modal-footer">
+    									<button type="button" id="modalCancelBtn" class="pure-button pure-button-primary" data-dismiss="modal">Cancel</button>
+    									<button type="button" id="modalOkBtn" class="pure-button pure-button-primary" data-dismiss="modal">OK</button>
+    								</div>
+    							</div>
+
+    						</div>
+    					</div>  
+
+    				</div>
+
+
     			</fieldset>
 
     			<!-- User Inputs -->
@@ -80,8 +136,17 @@
     			<div class="pure-control-group">
     				<button class="pure-button pure-button-primary" type="submit" id="submit" name="submitBtn" value="Convert">Calculate</button>
     				<button class="pure-button pure-button-primary" type="reset" id="reset" name="submitBtn">Reset</button>
-                    <button class="pure-button pure-button-primary" type="button" id="tweak" name="tweakBtn">Tweak</button>
     			</div>
+
+
+
+
+
+
+
+
+
+    			
     			<div class="pure-control-group">
     				<button class="pure-button pure-button-primary" id="options" name="advancedBtn" type="button">Advanced Options</button>
     			</div>

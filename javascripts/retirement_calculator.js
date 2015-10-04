@@ -1,10 +1,15 @@
 $(document).ready(function () {
 
-    $("#currentincome").autoNumeric('init',{aSign: "$", mDec: "0"});
-    $("#retirementincome").autoNumeric('init',{aSign: "$", mDec: "0"});
-    $("#currentsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
-    $("#totalsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
-    $("#monthlysavings").autoNumeric('init',{aSign: "$", mDec: "2"});
+    function formatCurrency() {
+        $("#currentincome").autoNumeric('init',{aSign: "$", mDec: "0"});
+        $("#retirementincome").autoNumeric('init',{aSign: "$", mDec: "0"});
+        $("#retirementincome").autoNumeric('update',{aSign: "$", mDec: "0"});
+        $("#currentsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
+        $("#totalsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
+        $("#monthlysavings").autoNumeric('init',{aSign: "$", mDec: "2"});
+    };
+
+    formatCurrency();
 
     var intInput = document.getElementById("intslider");
     var intOutput = document.getElementById('expectedinterest');
@@ -17,7 +22,7 @@ $(document).ready(function () {
     var submitBtn = document.getElementById('submit');
     var advancedBtn = document.getElementById('options');
     var printBtn = document.getElementById('print');
-    var teakBtn = document.getElementById('tweak');
+    var tweakBtn = document.getElementById('tweak');
 
     var name = document.getElementById("name");
     var currentAge = document.getElementById('age');
@@ -33,6 +38,9 @@ $(document).ready(function () {
 
     var totalSavings = document.getElementById('totalsavings');
     var monthlySavings = document.getElementById('monthlysavings');
+
+    
+
 
     var lifeFactorMap = {
         [
@@ -129,7 +137,6 @@ $(document).ready(function () {
     };
 
 
-
     $(function () {
         $("#fineTune").accordion({
             collapsible: true
@@ -174,7 +181,7 @@ $(document).ready(function () {
     //on submit action
     /*submitBtn.onclick = calculate;*/
     $('#submit').click(function(){
-        calculate();
+        calculate(retirementIncome);
         $('#resultpane').slideDown("slow");
         return false;
     })
@@ -185,25 +192,50 @@ $(document).ready(function () {
     //on print action
     printBtn.onclick = showPrintPage;
 
-    //on tweak action
-    tweak.onclick = showTweakModal;
+    //on modal show
+    $("#myModal").on('show.bs.modal', function(e){
+        var modal_monthly = document.getElementById("modalmonthly");
+        var modal_income = document.getElementById("modalincome");
 
-    //function to show modal
-    function showTweakModal(){
-        alert("modal");
-    };
+        modal_monthly.innerHTML = monthlySavings.value;
+        modal_income.value = retirementIncome;
+    });
+
+
+
+
 
     //function to show advanced options
     function showAdvancedOptions() {
         $('#advanced').toggle();
-        $('html, body').animate({
-    scrollTop: $("#advanced").offset().top
-}, 1000);
+        $('html, body').animate({scrollTop: $("#advanced").offset().top}, 1000);
     };
 
     //display print page
     function showPrintPage() {
         window.location='retirement_calculator_results.html';
+        // if print option selected
+        window.sessionStorage.getItem('name');
+        window.sessionStorage.setItem('name', name.value);
+        window.sessionStorage.getItem('currentAge');
+        window.sessionStorage.setItem('currentAge', currentAge.value);
+        window.sessionStorage.getItem('retirementAge');
+        window.sessionStorage.setItem('retirementAge', retirementAge.value);
+        window.sessionStorage.getItem('expectancy');
+        window.sessionStorage.setItem('expectancy', lifeInput.value);
+        window.sessionStorage.getItem('retirementIncome');
+        window.sessionStorage.setItem('retirementIncome', retirementIncome);
+        window.sessionStorage.getItem('currentSavings');
+        window.sessionStorage.setItem('currentSavings', currentSavings);
+        window.sessionStorage.getItem('socialSecurity');
+        window.sessionStorage.setItem('socialSecurity', socialSecurity);
+        window.sessionStorage.getItem('totalShortfall');
+        window.sessionStorage.setItem('totalShortfall', totalShortfall);
+        // window.sessionStorage.getItem('additionalSavings');
+        // window.sessionStorage.setItem('additionalSavings', additionalSavings.value);
+        window.sessionStorage.getItem('monthlySavings');
+        window.sessionStorage.setItem('monthlySavings', newSavings/12);
+        window.scrollTo(0, 0);
     };
 
     //estimate social security payments
@@ -240,10 +272,10 @@ $(document).ready(function () {
     };
 
     //show results
-        function calculate() {
+        function calculate(ret_income) {
         var yearsLeft = yearsToRetirementRounded(currentAge.value, retirementAge.value);
         var socialSecurity = estimateSocSec(currentIncome);
-        var annualShortfall = retirementIncome - socialSecurity - pension.value - otherIncome.value;
+        var annualShortfall = ret_income - socialSecurity - pension.value - otherIncome.value;
         var totalShortfall = annualShortfall * lifeFactorMap[[retirementAge.value, lifeOutput.innerHTML]];
         var finalSavings = currentSavings * savingsFactorMap[yearsLeft];
         var additionalSavings = totalShortfall - finalSavings;
@@ -252,39 +284,42 @@ $(document).ready(function () {
         $("#totalsavings").autoNumeric('set',finalSavings + additionalSavings);
         $("#monthlysavings").autoNumeric('set', newSavings/12);
 
-        window.sessionStorage.getItem('name');
-        window.sessionStorage.setItem('name', name.value);
-
-        window.sessionStorage.getItem('currentAge');
-        window.sessionStorage.setItem('currentAge', currentAge.value);
-
-        window.sessionStorage.getItem('retirementAge');
-        window.sessionStorage.setItem('retirementAge', retirementAge.value);
-
-        window.sessionStorage.getItem('expectancy');
-        window.sessionStorage.setItem('expectancy', lifeInput.value);
-
-        window.sessionStorage.getItem('retirementIncome');
-        window.sessionStorage.setItem('retirementIncome', retirementIncome);
-
-        window.sessionStorage.getItem('currentSavings');
-        window.sessionStorage.setItem('currentSavings', currentSavings);
-
-        window.sessionStorage.getItem('socialSecurity');
-        window.sessionStorage.setItem('socialSecurity', socialSecurity);
-
-        window.sessionStorage.getItem('totalShortfall');
-        window.sessionStorage.setItem('totalShortfall', totalShortfall);
-
-        // window.sessionStorage.getItem('additionalSavings');
-        // window.sessionStorage.setItem('additionalSavings', additionalSavings.value);
-
-        window.sessionStorage.getItem('monthlySavings');
-        window.sessionStorage.setItem('monthlySavings', newSavings/12);
-
-        window.scrollTo(0, 0);
-        return false;
+        
+        return newSavings;
     };
+
+    /* modal vars */
+
+    var modalMonthly = document.getElementById('modalmonthly');
+    var modalIncome = document.getElementById('modalincome');
+    var modalOkBtn = document.getElementById('modalOkBtn');
+    var modalCancelBtn = document.getElementById('modalCancelBtn');
+    var modalRetirementAge = document.getElementById('modalretirementage');
+    var ageIndex = retirementAge.selectedIndex;
+    //sets modal age to value selected in form
+    modalRetirementAge.selectedIndex = ageIndex;
+
+
+    function updateModal() {
+        
+        document.getElementById('modalmonthly').innerHTML = Math.round(100*calculate(modalIncome.value)/12)/100;
+    };
+
+    modalIncome.addEventListener('blur', updateModal, false);
+
+    function updateForm() {
+        document.getElementById('retirementincome').value = modalincome.value;
+        retirementAge.selectedIndex = modalRetirementAge.selectedIndex;
+        formatCurrency();
+    };
+
+    function revertForm() {
+        calculate(retirementIncome);
+
+    };
+
+    modalOkBtn.addEventListener('click', updateForm, false);
+    modalCancelBtn.addEventListener('click', revertForm, false);
 
 
 });
