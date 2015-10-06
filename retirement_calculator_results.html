@@ -7,8 +7,10 @@
      <script type="text/javascript" src="javascripts/autoNumeric.js"></script>
      <script type="text/javascript" src="javascripts/results.js"></script>
      <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
  </head>
  <body>
+     <p>You will need to save <span id="monthly_savings"></span> each month to meet your goal.</p>
      <table class="pure-table">
         <thead> 
             <tr>
@@ -79,7 +81,27 @@
         </tbody>
     </table>
 
-    <p>You will need to save <span id="monthly_savings"></span> each month to meet your goal.</p>
+    <div id="info">
+        <p><span><i class="fa fa-info-circle" ></i>&nbsp Calculations assume 3% rate of return after inflation</span></p>
+        <p><span><i class="fa fa-info-circle" ></i>&nbsp Social Security benefits estimated according to these thresholds:</p>
+        <table class="pure-table">
+            <tbody>
+                <thead>
+                    <tr>
+                        <th>less than $25,000</th>
+                        <th>$25,000 to $40,000</th>
+                        <th>over $40,000</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>$8,000</td>
+                    <td>$12,000</td>
+                    <td>$14,500</td>
+                </tr>
 
+            </tbody>
+        </table>
+
+    </div>
 </body>
 </html>

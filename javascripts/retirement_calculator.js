@@ -1,15 +1,17 @@
 $(document).ready(function () {
 
-        $("#currentincome").autoNumeric('init',{aSign: "$", mDec: "0"});
-        $("#retirementincome").autoNumeric('init',{aSign: "$", mDec: "0"});
-        $("#currentsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
-        $("#totalsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
-        $("#monthlysavings").autoNumeric('init',{aSign: "$", mDec: "2"});
-        $("#pension").autoNumeric('init',{aSign: "$", mDec: "0"});
-        $("#annuity").autoNumeric('init',{aSign: "$", mDec: "0"});
-        $("#otherincome").autoNumeric('init',{aSign: "$", mDec: "0"});
-        $("#modalincome").autoNumeric('init',{aSign: "$", mDec: "0"});
-        $("#modalmonthly").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#currentincome").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#retirementincome").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#currentsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#totalsavings").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#monthlysavings").autoNumeric('init',{aSign: "$", mDec: "2"});
+    $("#pension").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#annuity").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#otherincome").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#modalincome").autoNumeric('init',{aSign: "$", mDec: "0"});
+    $("#modalmonthly").autoNumeric('init',{aSign: "$", mDec: "0"});
+
+    $('[data-toggle="tooltip"]').tooltip({'placement':'right'}); 
 
     var intInput = document.getElementById("intslider");
     var intOutput = document.getElementById('expectedinterest');
@@ -42,76 +44,76 @@ $(document).ready(function () {
 
     var lifeFactorMap = {
         [
-            [55, 82]
+        [55, 82]
         ]: 18.79,
         [
-            [60, 82]
+        [60, 82]
         ]: 16.31,
         [
-            [65, 82]
+        [65, 82]
         ]: 13.45,
         [
-            [70, 82]
+        [70, 82]
         ]: 10.15,
         [
-            [55, 86]
+        [55, 86]
         ]: 20.53,
         [
-            [60, 86]
+        [60, 86]
         ]: 18.32,
         [
-            [65, 86]
+        [65, 86]
         ]: 15.77,
         [
-            [70, 86]
+        [70, 86]
         ]: 12.83,
         [
-            [55, 89]
+        [55, 89]
         ]: 21.71,
         [
-            [60, 89]
+        [60, 89]
         ]: 19.68,
         [
-            [65, 89]
+        [65, 89]
         ]: 17.35,
         [
-            [70, 89]
+        [70, 89]
         ]: 14.65,
         [
-            [55, 92]
+        [55, 92]
         ]: 22.79,
         [
-            [60, 92]
+        [60, 92]
         ]: 20.93,
         [
-            [65, 92]
+        [65, 92]
         ]: 18.79,
         [
-            [70, 92]
+        [70, 92]
         ]: 16.31,
         [
-            [55, 94]
+        [55, 94]
         ]: 23.46,
         [
-            [60, 94]
+        [60, 94]
         ]: 21.71,
         [
-            [65, 94]
+        [65, 94]
         ]: 19.68,
         [
-            [70, 94]
+        [70, 94]
         ]: 17.35,
         [
-            [55, 97]
+        [55, 97]
         ]: 24.4,
         [
-            [60, 97]
+        [60, 97]
         ]: 22.79,
         [
-            [65, 97]
+        [65, 97]
         ]: 20.93,
         [
-            [70, 97]
+        [70, 97]
         ]: 18.79
     };
 
@@ -254,7 +256,7 @@ $(document).ready(function () {
         var yearsLeft = yearsToRetirementRounded(currentAge.value, retirementAge.value);
         var socialSecurity = estimateSocSec($('#currentincome').autoNumeric('get'));
         var annualShortfall = 
-            ret_income - socialSecurity - $("#pension").autoNumeric('get') - $("#otherincome").autoNumeric('get');
+        ret_income - socialSecurity - $("#pension").autoNumeric('get') - $("#otherincome").autoNumeric('get');
         var totalShortfall = annualShortfall * lifeFactorMap[[retirementAge.value, lifeOutput.innerHTML]];
         var finalSavings = $("#currentsavings").autoNumeric('get') * savingsFactorMap[yearsLeft];
         var additionalSavings = totalShortfall - finalSavings;
@@ -265,41 +267,41 @@ $(document).ready(function () {
 
         // if print option selected
         
-            window.sessionStorage.getItem('name');
-            window.sessionStorage.setItem('name', name.value);
-            window.sessionStorage.getItem('currentAge');
-            window.sessionStorage.setItem('currentAge', currentAge.value);
-            window.sessionStorage.getItem('retirementAge');
-            window.sessionStorage.setItem('retirementAge', retirementAge.value);
-            window.sessionStorage.getItem('expectancy');
-            window.sessionStorage.setItem('expectancy', lifeInput.value);
-            window.sessionStorage.getItem('retirementIncome');
-            window.sessionStorage.setItem('retirementIncome', retirementIncome.value);
-            window.sessionStorage.getItem('currentSavings');
-            window.sessionStorage.setItem('currentSavings', currentSavings.value);
-            window.sessionStorage.getItem('socialSecurity');
-            window.sessionStorage.setItem('socialSecurity', socialSecurity);
-            window.sessionStorage.getItem('totalShortfall');
-            window.sessionStorage.setItem('totalShortfall', totalShortfall);
+        window.sessionStorage.getItem('name');
+        window.sessionStorage.setItem('name', name.value);
+        window.sessionStorage.getItem('currentAge');
+        window.sessionStorage.setItem('currentAge', currentAge.value);
+        window.sessionStorage.getItem('retirementAge');
+        window.sessionStorage.setItem('retirementAge', retirementAge.value);
+        window.sessionStorage.getItem('expectancy');
+        window.sessionStorage.setItem('expectancy', lifeInput.value);
+        window.sessionStorage.getItem('retirementIncome');
+        window.sessionStorage.setItem('retirementIncome', retirementIncome.value);
+        window.sessionStorage.getItem('currentSavings');
+        window.sessionStorage.setItem('currentSavings', currentSavings.value);
+        window.sessionStorage.getItem('socialSecurity');
+        window.sessionStorage.setItem('socialSecurity', socialSecurity);
+        window.sessionStorage.getItem('totalShortfall');
+        window.sessionStorage.setItem('totalShortfall', totalShortfall);
             // window.sessionStorage.getItem('additionalSavings');
             // window.sessionStorage.setItem('additionalSavings', additionalSavings.value);
             window.sessionStorage.getItem('monthlySavings');
             window.sessionStorage.setItem('monthlySavings', newSavings/12);
-    
 
-        window.scrollTo(0, 0);
 
-        return newSavings;
-    };
+            window.scrollTo(0, 0);
 
-    /* modal vars */
-    var modalMonthly = document.getElementById('modalmonthly');
-    var modalIncome = document.getElementById('modalincome');
+            return newSavings;
+        };
 
-    var modalOkBtn = document.getElementById('modalOkBtn');
-    var modalCancelBtn = document.getElementById('modalCancelBtn');
-    var modalRetirementAge = document.getElementById('modalretirementage');
-    var ageIndex = retirementAge.selectedIndex;
+        /* modal vars */
+        var modalMonthly = document.getElementById('modalmonthly');
+        var modalIncome = document.getElementById('modalincome');
+
+        var modalOkBtn = document.getElementById('modalOkBtn');
+        var modalCancelBtn = document.getElementById('modalCancelBtn');
+        var modalRetirementAge = document.getElementById('modalretirementage');
+        var ageIndex = retirementAge.selectedIndex;
     //sets modal age to value selected in form
     modalRetirementAge.selectedIndex = ageIndex;
 
@@ -316,7 +318,7 @@ $(document).ready(function () {
     function updateForm() {
         document.getElementById('retirementincome').value = modalincome.value;
         retirementAge.selectedIndex = modalRetirementAge.selectedIndex;
-    
+
     };
 
     function revertForm() {

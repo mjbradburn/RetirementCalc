@@ -3,14 +3,13 @@
     <head> 
     	<title> Retirement Calculator </title>
 
-
-    	
     	<link rel="stylesheet" href="retirement_calculator.css" type="text/css">
     	<script type="text/javascript" src="javascripts/jquery-1.11.3.js"></script>
     	<script type="text/javascript" src="javascripts/retirement_calculator.js"></script>
     	<script type="text/javascript" src="javascripts/autoNumeric.js"></script>
     	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
     	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     </head>
     <body>
@@ -128,10 +127,12 @@
     			<div class="pure-control-group">
     				<label for="retirementincome">Desired Annual Retirement Income:</label>
     				<input id="retirementincome" name="retirementincome" value="$21,000" ></input>
+    				<span><i class="fa fa-question-circle" data-toggle="tooltip" title="&nbsp Estimate at least 70% of your current income."></i></span>
     			</div>
     			<div class="pure-control-group">
     				<label for="currentsavings">Current Retirement Savings:</label>
     				<input id="currentsavings" name="currentsavings" value="$2,000" ></input>
+    				<span><i class="fa fa-question-circle" data-toggle="tooltip" title="&nbsp Total amount in retirement accounts like 401k and IRAs"></i></span>
     			</div>
     			<div class="pure-control-group">
     				<button class="pure-button pure-button-primary" type="submit" id="submit" name="submitBtn" value="Convert">Calculate</button>
